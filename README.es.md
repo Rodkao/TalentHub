@@ -1,30 +1,44 @@
-# TalentHub
+# TalentHub API 
 
-Primer proyecto backend para un sistema de gestión de reclutamiento. La idea principal fue enfocarme en la calidad de la arquitectura y en cómo organizar el código de forma profesional.
-Lo construí pensando en cómo escalaría un proyecto real, separando bien las responsabilidades y aplicando principios SOLID.
+Una API Backend diseñada para demostrar **Clean Architecture** y **prácticas modernas de .NET** aplicadas a un contexto de Gestión de Reclutamiento.
 
-# Tecnologías 
+> **Objetivo del Proyecto:** Mostrar calidad estructural, mantenibilidad y principios SOLID por encima de la complejidad de funcionalidades. Este proyecto sirve como una prueba de concepto técnica para una base de código escalable de nivel Junior Developer.
 
-.NET 10 (C# 14): aprovechar las últimas características del lenguaje, como los constructores primarios que limpian mucho el código.
-SQL Server/Entity Framework Core: manejo de datos usando el enfoque Code-First.
-xUnit: tests unitarios.
-Swagger: documentar y probar la API visualmente.
+## Arquitectura y Decisiones de Diseño
 
-# Arquitectura
+Esta solución implementa **Clean Architecture**, separando responsabilidades en capas distintas para asegurar que la lógica de negocio central permanezca independiente de frameworks externos.
 
-Domain: donde viven las entidades y las reglas de negocio.
-Application: define qué se puede hacer en el sistema (interfaces y casos de uso).
-Infrastructure: quien habla con la base de datos y donde está la implementación de EF y los repositorios.
-Backend (API): capa que recibe las peticiones HTTP y se comunica con las otras capas mediante inyección de dependencias.
+* **TalentHub.Domain:** Contiene la Lógica Empresarial y las Entidades.
+* **TalentHub.Application:** Define los Casos de Uso e Interfaces (Patrón Repositorio).
+* **TalentHub.Infrastructure:** Implementa el acceso a datos usando **Entity Framework Core** y **SQL Server**.
+* **TalentHub.API:** Una capa de presentación ligera usando **endpoints RESTful**.
 
-# Cómo correr
+## Stack Tecnológico
 
-1. Clonar el repositorio.
+* **Framework:** .NET 10 (C# 14) - *Aprovechando las últimas características como Constructores Primarios.*
+* **Base de Datos:** SQL Server.
+* **ORM:** Entity Framework Core (Enfoque Code-First).
+* **Testing:** xUnit (Pruebas Unitarias para la Lógica de Dominio).
+* **Documentación:** Swagger / OpenAPI.
 
-2. Abrir TalentHub.sln en Visual Studio.
+## Características Clave Implementadas
 
-3. Tener SQL Server (o LocalDB en VS) funcionando.
+* **Operaciones CRUD Robustas:** Gestión completa de Ofertas de Trabajo.
+* **Validación de Lógica de Negocio:** Reglas de validación estrictas asegurando la integridad de datos a nivel de Dominio.
+* **Inyección de Dependencias:** Servicios totalmente desacoplados configurados en `Program.cs`.
+* **Documentación Automatizada:** Pruebas interactivas de la API vía Swagger UI.
 
-4. Abrir la consola del administrador de paquetes y ejecutar el comando Update-Database para que se cree la base de datos.
+## Cómo Ejecutar
 
-5. Darle a Play. Debería abrirse el navegador con Swagger listo para probar los endpoints.
+1.  Clona este repositorio.
+2.  Abre la solución `TalentHub.sln` en **Visual Studio**.
+3.  Asegúrate de tener **SQL Server LocalDB** (viene por defecto con VS) o actualiza los `ConnectionStrings` en `appsettings.json`.
+4.  Ejecuta las migraciones de base de datos en la Consola del Administrador de Paquetes (Package Manager Console):
+    ```powershell
+    Update-Database
+    ```
+5.  Presiona **F5** para ejecutar. El navegador debería abrirse con Swagger.
+    > **Nota:** Si no se abre automáticamente, navega a: `http://localhost:<PUERTO>/swagger/index.html` (revisa la salida de la consola para ver tu puerto específico, ej: 5094).
+
+---
+*Desarrollado con .NET 10*
